@@ -17,6 +17,7 @@ package hello;
 
 import java.util.Map;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -50,7 +52,25 @@ public class HelloWorldConfigurationTests {
 	public void testGreeting() throws Exception {
 		ResponseEntity<String> entity = new TestRestTemplate().getForEntity(
 				"http://localhost:" + this.port + "/", String.class);
+
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 	}
 
+	@Test
+	public void test_contents() {
+		ResponseEntity<String> entity = new TestRestTemplate().getForEntity(
+				"http://localhost:" + this.port + "/", String.class);
+
+		assertThat(entity.getBody()).isEqualTo("Hello IBM Bluemix!");
+	}
+
+	@Test
+	public void test_object() {
+		ResponseEntity<SomeObject> response =
+				new TestRestTemplate()
+						.getForEntity("http://localhost:" + port + "/object", SomeObject.class);
+		SomeObject responseBody = response.getBody();
+
+		assertThat(responseBody).isEqualTo(new SomeObject("some_value"));
+	}
 }
