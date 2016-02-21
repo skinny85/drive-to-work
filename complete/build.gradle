@@ -47,6 +47,9 @@ task buildDocker(type: Docker, dependsOn: build) {
 
 repositories {
     mavenCentral()
+    maven {
+        url "http://repository.jetbrains.com/all"
+    }
 }
 
 sourceCompatibility = 1.8
@@ -58,6 +61,7 @@ dependencies {
 
     testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile "org.assertj:assertj-core:3.3.0"
+    testCompile 'org.jetbrains.spek:spek:0.1.195'
 }
 
 task wrapper(type: Wrapper) {
