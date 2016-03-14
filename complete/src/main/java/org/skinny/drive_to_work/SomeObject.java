@@ -1,9 +1,9 @@
-package hello;
+package org.skinny.drive_to_work;
 
 public class SomeObject {
     private String value;
 
-    public SomeObject() {
+    private SomeObject() {
     }
 
     public SomeObject(String value) {

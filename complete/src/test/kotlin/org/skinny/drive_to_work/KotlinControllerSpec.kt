@@ -1,7 +1,8 @@
-package hello
+package org.skinny.drive_to_work
 
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
+import org.junit.Ignore
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.IntegrationTest
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestTemplate
 @WebAppConfiguration
 @IntegrationTest("server.port=0")
 @DirtiesContext
+@Ignore
 class KotlinControllerSpec : Spek() {
     @Value("\${local.server.port}")
     var port: Int = 0

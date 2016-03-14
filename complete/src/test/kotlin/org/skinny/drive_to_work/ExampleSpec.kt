@@ -1,4 +1,4 @@
-package hello
+package org.skinny.drive_to_work
 
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek

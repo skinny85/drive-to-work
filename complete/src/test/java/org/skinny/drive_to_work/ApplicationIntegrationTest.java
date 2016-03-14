@@ -13,11 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package hello;
+package org.skinny.drive_to_work;
 
-import java.util.Map;
-
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,51 +23,58 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Basic integration tests for service demo application.
- *
- * @author Dave Syer
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest("server.port=0")
-@DirtiesContext
-public class HelloWorldConfigurationTests {
-
+//@DirtiesContext
+public class ApplicationIntegrationTest {
 	@Value("${local.server.port}")
 	private int port;
 
 	@Test
-	public void testGreeting() throws Exception {
-		ResponseEntity<String> entity = new TestRestTemplate().getForEntity(
+	public void home_get() throws Exception {
+		ResponseEntity<String> response = new TestRestTemplate().getForEntity(
 				"http://localhost:" + this.port + "/", String.class);
 
-		assertEquals(HttpStatus.OK, entity.getStatusCode());
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody()).isEqualTo("Hello IBM Bluemix!");
 	}
 
 	@Test
-	public void test_contents() {
-		ResponseEntity<String> entity = new TestRestTemplate().getForEntity(
-				"http://localhost:" + this.port + "/", String.class);
-
-		assertThat(entity.getBody()).isEqualTo("Hello IBM Bluemix!");
-	}
-
-	@Test
-	public void test_object() {
+	public void object_get() {
 		ResponseEntity<SomeObject> response =
 				new TestRestTemplate()
 						.getForEntity("http://localhost:" + port + "/object", SomeObject.class);
-		SomeObject responseBody = response.getBody();
 
-		assertThat(responseBody).isEqualTo(new SomeObject("some_value"));
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody()).isEqualTo(new SomeObject("some_value"));
+	}
+
+	@Test
+	public void kotlin_get() {
+		ResponseEntity<String> response =
+				new TestRestTemplate()
+						.getForEntity("http://localhost:" + port + "/kotlin", String.class);
+
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getBody()).isEqualTo("Hello World from Kotlin!");
+	}
+
+	@Test
+	public void episodes_get() {
+		ResponseEntity<Episode> response =
+				new TestRestTemplate()
+						.getForEntity("http://localhost:" + port + "/dtw/api/episodes", Episode.class);
+		Episode responseBody = response.getBody();
+
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(responseBody).isNotNull();
+		assertThat(responseBody.getNumber()).isEqualTo(313);
 	}
 }
