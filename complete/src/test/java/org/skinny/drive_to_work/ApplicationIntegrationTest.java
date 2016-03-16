@@ -26,6 +26,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -68,13 +70,12 @@ public class ApplicationIntegrationTest {
 
 	@Test
 	public void episodes_get() {
-		ResponseEntity<Episode> response =
+		ResponseEntity<List> response =
 				new TestRestTemplate()
-						.getForEntity("http://localhost:" + port + "/dtw/api/episodes", Episode.class);
-		Episode responseBody = response.getBody();
+						.getForEntity("http://localhost:" + port + "/dtw/api/episodes", List.class);
+		List<Episode> responseBody = response.getBody();
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(responseBody).isNotNull();
-		assertThat(responseBody.getNumber()).isEqualTo(313);
+		assertThat(responseBody).hasSize(3);
 	}
 }
