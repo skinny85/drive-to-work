@@ -3,7 +3,7 @@ package org.skinny.drive_to_work
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
 
-class ExampleSpec : Spek() {
+class ExampleSpekTest : Spek() {
     init {
         given("an empty String Builder") {
             val sb = StringBuilder()
