@@ -26,6 +26,10 @@ apply plugin: 'docker'
 group = 'skinny'
 version = '0.1.0'
 
+jar {
+    archiveName "${baseName}.${extension}"
+}
+
 task buildDocker(type: Docker, dependsOn: build) {
   push = false
   applicationName = project.name
