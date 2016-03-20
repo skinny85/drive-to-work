@@ -1,3 +1,5 @@
+package org.skinny.drive_to_work
+
 import spock.lang.Specification
 
 class ExampleSpockTest extends Specification {
