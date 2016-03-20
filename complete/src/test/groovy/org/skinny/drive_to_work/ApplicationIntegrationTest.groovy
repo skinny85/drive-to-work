@@ -24,6 +24,6 @@ class ApplicationIntegrationTest extends Specification {
 
         then:
         response.statusCode == HttpStatus.OK
-        responseBody.size() == 3
+        responseBody.size() == 5
     }
 }
