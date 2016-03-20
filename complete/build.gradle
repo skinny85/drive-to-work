@@ -24,7 +24,7 @@ apply plugin: 'docker'
 
 // This is used as the docker image prefix (org)
 group = 'skinny'
-version = '0.1.0'
+version = '0.2.0'
 
 jar {
     archiveName "${baseName}.${extension}"
