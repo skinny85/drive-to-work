@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
+import java.time.LocalDate
+
 @ContextConfiguration(loader = SpringApplicationContextLoader.class,
         classes = [Application.class])
 @WebIntegrationTest(randomPort = true)
@@ -19,11 +21,14 @@ class ApplicationIntegrationTest extends Specification {
 
     def "GET /dtw/api/episodes"() {
         when:
-        def response = restTemplate.getForEntity("http://localhost:$port/dtw/api/episodes", List)
-        def responseBody = response.body
+        def response = restTemplate.getForEntity("http://localhost:$port/dtw/api/episodes", EpisodeList)
+        EpisodeList responseBody = response.body
+        List<Episode> episodeList = responseBody.episodes
 
         then:
         response.statusCode == HttpStatus.OK
-        responseBody.size() == 5
+        episodeList.size() == 50
+        Episode lastEpisode = episodeList.get(0)
+        lastEpisode.releaseDate == LocalDate.of(2016, 3, 25)
     }
 }

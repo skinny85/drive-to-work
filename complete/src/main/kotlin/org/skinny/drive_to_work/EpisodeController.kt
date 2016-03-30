@@ -9,7 +9,7 @@ import java.time.LocalDate
 @RequestMapping("/dtw/api/episodes")
 class EpisodeController {
     @RequestMapping(method = arrayOf(RequestMethod.GET))
-    fun episodes(): List<Episode> = episodes
+    fun episodes(): EpisodeList = EpisodeList(episodes)
 
     companion object {
         val episodes = listOf(
