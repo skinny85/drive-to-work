@@ -21,9 +21,8 @@ class ApplicationIntegrationTest extends Specification {
 
     def "GET /dtw/api/episodes"() {
         when:
-        def response = restTemplate.getForEntity("http://localhost:$port/dtw/api/episodes", EpisodeList)
-        EpisodeList responseBody = response.body
-        List<Episode> episodeList = responseBody.episodes
+        def response = restTemplate.getForEntity("http://localhost:$port/dtw/api/episodes", EpisodesResource)
+        List<Episode> episodeList = response.body._embedded.episodeList
 
         then:
         response.statusCode == HttpStatus.OK

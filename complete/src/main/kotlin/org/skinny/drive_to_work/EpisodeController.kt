@@ -1,5 +1,13 @@
 package org.skinny.drive_to_work;
 
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.hateoas.EntityLinks
+import org.springframework.hateoas.ExposesResourceFor
+import org.springframework.hateoas.Resources
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,9 +15,15 @@ import java.time.LocalDate
 
 @RestController
 @RequestMapping("/dtw/api/episodes")
-class EpisodeController {
-    @RequestMapping(method = arrayOf(RequestMethod.GET))
-    fun episodes(): EpisodeList = EpisodeList(episodes)
+@ExposesResourceFor(Episode::class)
+class EpisodeController @Autowired constructor(val entityLinks: EntityLinks) {
+
+    @RequestMapping(method = arrayOf(RequestMethod.GET), produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    fun episodes(): HttpEntity<Resources<Episode>> {
+        val resources = Resources<Episode>(episodes)
+        resources.add(entityLinks.linkToCollectionResource(Episode::class.java))
+        return ResponseEntity<Resources<Episode>>(resources, HttpStatus.OK)
+    }
 
     companion object {
         val episodes = listOf(

@@ -31,19 +31,20 @@ jar {
 }
 
 task buildDocker(type: Docker, dependsOn: build) {
-  push = false
-  applicationName = project.name
-  dockerfile = file('src/main/docker/Dockerfile')
-  doFirst {
-    copy {
-      from jar
-      into stageDir
+    push = false
+    applicationName = project.name
+    dockerfile = file('src/main/docker/Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
     }
-  }
 }
 
 repositories {
     mavenCentral()
+
     maven {
         url "http://repository.jetbrains.com/all"
     }
@@ -54,6 +55,7 @@ targetCompatibility = 1.8
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-hateoas"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     testCompile "org.springframework.boot:spring-boot-starter-test"
