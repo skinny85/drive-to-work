@@ -14,6 +14,11 @@ open class Application {
         builder.serializerByType(LocalDate::class.java, LocalDateSerializer());
         return builder;
     }
+
+    @Bean
+    open fun episodeRepository(): EpisodeRepository {
+        return EpisodeRepository()
+    }
 }
 
 fun main(args: Array<String>) {
