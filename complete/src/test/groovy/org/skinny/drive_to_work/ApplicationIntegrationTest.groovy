@@ -22,11 +22,11 @@ class ApplicationIntegrationTest extends Specification {
     def "GET /dtw/api/episodes"() {
         when:
         def response = restTemplate.getForEntity("http://localhost:$port/dtw/api/episodes", EpisodesResource)
-        List<Episode> episodeList = response.body._embedded.episodeList
+        List<Episode> episodeList = response.body._embedded.episodes
 
         then:
         response.statusCode == HttpStatus.OK
-        episodeList.size() == 50
+        episodeList.size() == 25
         Episode lastEpisode = episodeList.get(0)
         lastEpisode.releaseDate == LocalDate.of(2016, 3, 25)
     }

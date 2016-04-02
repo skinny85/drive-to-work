@@ -1,5 +1,5 @@
 package org.skinny.drive_to_work
 
-data class EpisodeList(val episodeList: List<Episode>) {
+data class EpisodeList(val episodes: List<Episode>) {
     constructor() : this(emptyList())
 }

@@ -1,10 +1,18 @@
 package org.skinny.drive_to_work
 
+import java.lang.Math.min
 import java.time.LocalDate
 
 class EpisodeRepository {
-    fun episodes(): List<Episode> {
-        return episodes.subList(0, 25)
+    fun episodes(pageIndex: Int = 0, limit: Int = 25): Episodes {
+        require(pageIndex >= 0, { "pageIndex must be non-negative, got: $pageIndex" })
+        require(limit >= 0, { "limit must be non-negative, got: $limit" })
+
+        val total = episodes.size
+        val actualLimit = min(limit, 25)
+        val start = min(actualLimit * pageIndex, total)
+        val end =  min(actualLimit * (pageIndex + 1), total)
+        return Episodes(episodes.subList(start, end), total)
     }
 
     companion object {
