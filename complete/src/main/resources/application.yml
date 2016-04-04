@@ -5,6 +5,10 @@ server:
 spring:
   application:
     name: testLatticeApp
+  datasource:
+    url: jdbc:hsqldb:file:data/hsql-file-db;shutdown=false
+    username: sa
+    password: ""
 
 ribbon:
   ServerListRefreshInterval: 1000
