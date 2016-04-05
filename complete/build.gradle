@@ -56,10 +56,12 @@ targetCompatibility = 1.8
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-hateoas"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
     compile "org.springframework.boot:spring-boot-starter-data-rest"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     runtime "org.hsqldb:hsqldb"
+    compile "org.flywaydb:flyway-core"
 
     testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile "org.assertj:assertj-core:3.3.0"
