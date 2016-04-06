@@ -6,9 +6,10 @@ spring:
   application:
     name: testLatticeApp
   datasource:
-    url: jdbc:hsqldb:file:data/hsql-file-db;shutdown=false
+    url: jdbc:hsqldb:file:data/hsql-file-db
     username: sa
     password: ""
+  jpa.hibernate.ddl-auto: validate
 
 ribbon:
   ServerListRefreshInterval: 1000
