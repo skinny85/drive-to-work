@@ -19,8 +19,11 @@ open class Application {
     open fun episodeRepository(): EpisodeRepository {
         return EpisodeRepository()
     }
-}
 
-fun main(args: Array<String>) {
-    SpringApplication.run(Application::class.java, *args);
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            SpringApplication.run(Application::class.java, *args);
+        }
+    }
 }
