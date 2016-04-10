@@ -1,0 +1,13 @@
+dtw-web-dc:
+  build: .
+#  links:
+#    - db
+  ports:
+    - "8080:8080"
+  volumes:
+    - ~/.gradle:/root/.gradle
+
+#db:
+#  image: "mysql:5.6"
+#  environment:
+#     - MYSQL_ROOT_PASSWORD=verysecret
