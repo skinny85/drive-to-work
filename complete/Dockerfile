@@ -1,5 +1,9 @@
 FROM anapsix/alpine-java
 
+RUN mkdir -p /root/.gradle
+ENV HOME /root
+VOLUME /root/.gradle
+
 RUN mkdir /app
 ADD build.gradle settings.gradle gradlew /app/
 WORKDIR /app
