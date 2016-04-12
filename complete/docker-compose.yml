@@ -6,6 +6,7 @@ dtw-web-dc:
     - "8080:8080"
   volumes:
     - ~/.gradle:/root/.gradle
+    - .:/app
 
 #db:
 #  image: "mysql:5.6"
