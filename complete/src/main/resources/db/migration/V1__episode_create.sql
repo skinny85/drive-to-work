@@ -1,0 +1,8 @@
+CREATE TABLE episode (
+	id BIGINT NOT NULL,
+	title VARCHAR(100) NOT NULL,
+	description VARCHAR(255) NOT NULL,
+	url VARCHAR(100) NOT NULL,
+
+	PRIMARY KEY (id)
+);
