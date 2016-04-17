@@ -63,6 +63,7 @@ dependencies {
 
     runtime "org.hsqldb:hsqldb"
     compile "org.flywaydb:flyway-core"
+    compile 'mysql:mysql-connector-java:5.1.38'
 
     testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile "org.assertj:assertj-core:3.3.0"

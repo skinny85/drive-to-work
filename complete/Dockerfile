@@ -11,4 +11,5 @@ VOLUME /app
 EXPOSE 8080
 ENV GRADLE_OPTS -Dorg.gradle.native=false
 WORKDIR /app
-ENTRYPOINT ["./gradlew", "bootRun"]
+#RUN ["./gradlew", "assemble"]
+#ENTRYPOINT ["./gradlew", "bootRun"]

@@ -1,14 +1,16 @@
 dtw-web-dc:
   build: .
-#  links:
-#    - db
+  links:
+    - db
   ports:
     - "8080:8080"
   volumes:
     - ~/.gradle:/root/.gradle
     - .:/app
+  command: bash -c "./gradlew assemble && java -Dspring.profiles.active=prod -Ddb.user=root -jar build/libs/gs-spring-boot-docker.jar"
 
-#db:
-#  image: "mysql:5.6"
-#  environment:
-#     - MYSQL_ROOT_PASSWORD=verysecret
+db:
+  image: "mysql:5.6"
+  environment:
+    - MYSQL_ROOT_PASSWORD=verysecret
+    - MYSQL_DATABASE=dtw

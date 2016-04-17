@@ -1,12 +1,11 @@
 server:
   port: 8080
 
-#TODO: figure out why I need this here and in bootstrap.yml
 spring:
   application:
     name: testLatticeApp
   datasource:
-    url: jdbc:hsqldb:file:data/hsql-file-db
+    url: jdbc:hsqldb:file:data/hsql-file-db;sql.syntax_mys=true
     username: sa
     password: ""
   jpa.hibernate.ddl-auto: validate
