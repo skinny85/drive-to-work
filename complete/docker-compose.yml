@@ -7,7 +7,10 @@ dtw-web-dc:
   volumes:
     - ~/.gradle:/root/.gradle
     - .:/app
-  command: bash -c "./gradlew assemble && java -Dspring.profiles.active=prod -Ddb.user=root -jar build/libs/gs-spring-boot-docker.jar"
+  environment:
+    - SPRING_PROFILES_ACTIVE=prod
+    - DB_USER=root
+  command: ./gradlew bootRun
 
 db:
   image: "mysql:5.6"
