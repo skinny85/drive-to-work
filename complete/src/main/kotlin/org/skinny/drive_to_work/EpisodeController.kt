@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/dtw/api/episodes")
 class EpisodeController @Autowired constructor(
-        val episodeRepository: EpisodeRepository) {
+        val episodeRepository: EpisodeSpringRepository) {
     @RequestMapping(method = arrayOf(RequestMethod.GET), produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
-    fun episodes(@PageableDefault(size = 25) pageable: Pageable, assembler: PagedResourcesAssembler<Episode>):
-            HttpEntity<PagedResources<Resource<Episode>>> {
-        val episodes = episodeRepository.episodes(pageable.pageNumber, pageable.pageSize)
-        val page: Page<Episode> = PageImpl(episodes.episodes, pageable, episodes.total.toLong())
+    fun episodes(@PageableDefault(size = 25) pageable: Pageable, assembler: PagedResourcesAssembler<EpisodeEntity>):
+            HttpEntity<PagedResources<Resource<EpisodeEntity>>> {
+        val page = episodeRepository.findByOrderByIdDesc(pageable)
+
         return ResponseEntity(assembler.toResource(page), HttpStatus.OK)
     }
 }

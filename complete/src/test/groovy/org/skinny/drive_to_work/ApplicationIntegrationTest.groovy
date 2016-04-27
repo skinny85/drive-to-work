@@ -5,6 +5,7 @@ import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.boot.test.TestRestTemplate
 import org.springframework.boot.test.WebIntegrationTest
 import org.springframework.http.HttpStatus
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
@@ -13,6 +14,7 @@ import java.time.LocalDate
 @ContextConfiguration(loader = SpringApplicationContextLoader.class,
         classes = [Application.class])
 @WebIntegrationTest(randomPort = true)
+@ActiveProfiles("test")
 class ApplicationIntegrationTest extends Specification {
     @Value('${local.server.port}')
     int port
@@ -22,12 +24,14 @@ class ApplicationIntegrationTest extends Specification {
     def "GET /dtw/api/episodes"() {
         when:
         def response = restTemplate.getForEntity("http://localhost:$port/dtw/api/episodes", EpisodesResource)
-        List<Episode> episodeList = response.body._embedded.episodes
+        List<EpisodeEntity> episodeList = response.body._embedded.episodeEntities
 
         then:
         response.statusCode == HttpStatus.OK
         episodeList.size() == 25
-        Episode lastEpisode = episodeList.get(0)
-        lastEpisode.releaseDate == LocalDate.of(2016, 3, 25)
+        EpisodeEntity lastEpisode = episodeList.get(0)
+//        lastEpisode.releaseDate == LocalDate.of(2016, 3, 25)
+        lastEpisode.title == "Lessons Learned: Theros"
+        lastEpisode.id == 317
     }
 }

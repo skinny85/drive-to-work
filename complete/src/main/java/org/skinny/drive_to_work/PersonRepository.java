@@ -1,8 +1,0 @@
-package org.skinny.drive_to_work;
-
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface PersonRepository extends CrudRepository<Person, Long> {
-}
