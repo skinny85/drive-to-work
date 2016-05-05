@@ -9,8 +9,6 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
-import java.time.LocalDate
-
 @ContextConfiguration(loader = SpringApplicationContextLoader.class,
         classes = [Application.class])
 @WebIntegrationTest(randomPort = true)
@@ -24,7 +22,7 @@ class ApplicationIntegrationTest extends Specification {
     def "GET /dtw/api/episodes"() {
         when:
         def response = restTemplate.getForEntity("http://localhost:$port/dtw/api/episodes", EpisodesResource)
-        List<EpisodeEntity> episodeList = response.body._embedded.episodeEntities
+        List<EpisodeEntity> episodeList = response.body._embedded.episodes
 
         then:
         response.statusCode == HttpStatus.OK
