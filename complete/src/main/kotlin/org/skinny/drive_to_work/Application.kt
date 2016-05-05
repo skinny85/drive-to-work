@@ -18,13 +18,6 @@ open class Application : RepositoryRestMvcConfiguration() {
     }
 
     @Bean
-    open fun jacksonBuilder(): Jackson2ObjectMapperBuilder {
-        val builder: Jackson2ObjectMapperBuilder = Jackson2ObjectMapperBuilder();
-        builder.serializerByType(LocalDate::class.java, LocalDateSerializer());
-        return builder;
-    }
-
-    @Bean
     open fun episodeRepository(): EpisodeRepository {
         return EpisodeRepository()
     }

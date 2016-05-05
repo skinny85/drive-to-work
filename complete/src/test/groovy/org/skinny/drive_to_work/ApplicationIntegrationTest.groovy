@@ -9,6 +9,8 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
+import java.time.LocalDate
+
 @ContextConfiguration(loader = SpringApplicationContextLoader.class,
         classes = [Application.class])
 @WebIntegrationTest(randomPort = true)
@@ -28,7 +30,7 @@ class ApplicationIntegrationTest extends Specification {
         response.statusCode == HttpStatus.OK
         episodeList.size() == 25
         EpisodeEntity lastEpisode = episodeList.get(0)
-//        lastEpisode.releaseDate == LocalDate.of(2016, 3, 25)
+        lastEpisode.releaseDate == LocalDate.of(2016, 3, 25)
         lastEpisode.title == "Lessons Learned: Theros"
         lastEpisode.id == 317
     }

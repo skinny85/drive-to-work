@@ -3,6 +3,7 @@ CREATE TABLE episode (
 	title VARCHAR(100) NOT NULL,
 	description VARCHAR(255) NOT NULL,
 	url VARCHAR(100) NOT NULL,
+	release_date DATE NOT NULL,
 
 	PRIMARY KEY (id)
 );
