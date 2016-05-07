@@ -3,3 +3,5 @@ spring:
     url: jdbc:mysql://${db.port.3306.tcp.addr}:${db.port.3306.tcp.port}/${db.env.mysql.database}
     username: ${db.user}
     password: ${db.env.mysql.root.password}
+    test-on-borrow: true
+    validation-query: SELECT 1
